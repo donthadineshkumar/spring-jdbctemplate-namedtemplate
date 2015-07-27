@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName"  value="com.mysql.jdbc.Driver"/>
+		<property name="url"  value="jdbc:mysql://localhost:3306/mydatabase"/>
+		<property name="username"  value="root"/>
+		<property name="password"  value="root"/>	
+	</bean>
+	
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+	<!-- dont assign the dataSource bean defined above to a value atrtribute
+	just assign as a ref using ref attr -->
+			<property name="dataSource"  ref="dataSource"/>
+	</bean>
+	
+	<bean id="namedTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+		<constructor-arg name="dataSource"  ref="dataSource"/>
+	</bean>
+	
+	<bean id="bookDao" class="com.jdbc.dao.BookDao">
+		<constructor-arg name="jdbcTemplate" ref="jdbcTemplate" />
+	</bean>
+
+	<bean id="bookDaoNamed" class="com.jdbc.dao.BookDao">
+		<constructor-arg name="namedTemplate" ref="namedTemplate" />
+	</bean>
+
+</beans>
