@@ -12,6 +12,10 @@ public class Book {
 	
 
 	
+	public Book() {
+	}
+
+
 	public Book(Integer id, String author, String description, String isbn,
 			String title, Float price) {
 		this.id = id;

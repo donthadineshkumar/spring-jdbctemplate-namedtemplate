@@ -29,6 +29,12 @@ public class JdbcTem {
 		
 		JdbcTemplate template = (JdbcTemplate) appctxt.getBean("jdbcTemplate");
 		
+		/*
+		 * queryForObject - execute a query given static SQL,
+		 * mapping a single result row to a java object
+		 * via a RowMapper
+		 */
+		
 		Article  article
 			= (Article) template.queryForObject(sql, new ArticleRepo());
 		
